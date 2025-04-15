@@ -1,7 +1,7 @@
 networks:
   expense: {}
 volumes:
-  mysql
+  mysql:
 services:
   mysql: # docker run -d --name mysql --network expense -v mysql:/var/lib/mysql mysql:1.0.0 . The below structure is this cmd
     image: mysql:1.0.0
