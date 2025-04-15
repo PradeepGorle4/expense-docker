@@ -1,0 +1,42 @@
+networks:
+  expense: {}
+volumes:
+  mysql
+services:
+  mysql: # docker run -d --name mysql --network expense -v mysql:/var/lib/mysql mysql:1.0.0 . The below structure is this cmd
+    image: mysql:1.0.0
+    networks:
+    - expense
+    container_name: mysql
+    volumes:
+    - mysql:/var/lib/mysql # This is the official path given in MYSQL docker image details where mysql stores the data
+  
+  backend:
+    image: backend:1.0.0
+    networks:
+    - expense
+    container_name: backend
+    depends_on: mysql # This is inline syntax, enough for one service, but if u have multiple dependencies use list like in frontend
+  
+  frontend:
+    image: frontend:1.0.0
+    networks:
+    - expense
+    container_name: frontend
+    ports:
+    - 80:80
+    depends_on:
+    - backend # best practise for depends_on since we can list multiple dependencies 
+
+
+# You can also implement health checks to make sure container is ready and fully functional before creating other containers like below
+
+# healthcheck:
+#       test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 3
+
+
+
+
