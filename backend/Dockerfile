@@ -6,7 +6,7 @@ RUN addgroup -S expense && adduser -S expense -G expense && \
     chown -R expense:expense /opt/backend
 WORKDIR /opt/backend
 COPY /code/package.json .
-COPY /code/*.js .
+COPY /code/*.js ./
 RUN npm install
 ENV DB_HOST="mysql"
 # ENV DB_HOST="localhost" 
