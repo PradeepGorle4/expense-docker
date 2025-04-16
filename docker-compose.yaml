@@ -4,7 +4,7 @@ volumes:
   mysql:
 services:
   mysql: # docker run -d --name mysql --network expense -v mysql:/var/lib/mysql mysql:1.0.0 . The below structure is this cmd
-    image: mysql:1.0.0
+    image: pradeepgorle/mysql:1.0.0
     networks:
     - expense
     container_name: mysql
@@ -12,7 +12,7 @@ services:
     - mysql:/var/lib/mysql # This is the official path given in MYSQL docker image details where mysql stores the data
   
   backend:
-    image: backend:1.0.0
+    image: pradeepgorle/backend:1.0.0
     networks:
     - expense
     container_name: backend
@@ -21,7 +21,7 @@ services:
     command: sh -c "sleep 10 && node /opt/backend/index.js"
     
   frontend:
-    image: frontend:1.0.0
+    image: pradeepgorle/frontend:1.0.0
     networks:
     - expense
     container_name: frontend
